@@ -16,7 +16,6 @@ router.post("/refresh", async (req, res) => {
 
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ message: "Token expired or invalid" });
-    console.log(user)
     const newAccessToken = jwt.sign({ email: user.email, user_id: user.user_id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
     res.json({ accessToken: newAccessToken });
   });

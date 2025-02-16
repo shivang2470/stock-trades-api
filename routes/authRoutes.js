@@ -19,7 +19,6 @@ const generateRefreshToken = (user) => {
 router.post("/auth", async (req, res) => {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
-  
     if (!user) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user = new User({ email, password: hashedPassword, user_id: uuidv4() });
